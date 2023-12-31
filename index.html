@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الصفحة الرئيسية</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // استهداف العناصر التي نريد تحريكها
+            const header = document.querySelector('header');
+            const mainContent = document.querySelector('.main-content');
+            const footer = document.querySelector('footer');
+    
+            // تحديد التأثيرات المطلوبة
+            const fadeInHeader = anime({
+                targets: header,
+                translateY: [-50, 0],
+                opacity: [0, 1],
+                easing: 'easeOutExpo',
+                duration: 1000
+            });
+    
+            const fadeInContent = anime({
+                targets: mainContent,
+                translateY: [50, 0],
+                opacity: [0, 1],
+                easing: 'easeOutExpo',
+                duration: 1000,
+                delay: 500 // تأخير 500 مللي ثانية بعد بداية التأثير الأول
+            });
+    
+            const fadeInFooter = anime({
+                targets: footer,
+                translateY: [20, 0],
+                opacity: [0, 1],
+                easing: 'easeOutExpo',
+                duration: 1000,
+                delay: 1000 // تأخير 1000 مللي ثانية بعد بداية التأثير الثاني
+            });
+        });
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #e0e5df;
+
+        }
+
+        header {
+            background-color: #064c11;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .main-content {
+            text-align: center;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+            background: url('images/m56.jpeg');
+            height: 100%;
+            border-radius:10%;
+            
+
+        }
+
+        .main-content1{
+            margin-bottom: 25%;
+            height: 260px;
+            border-radius: 50px;
+            background: url('images/h34.png');
+       
+        }
+
+        .show-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        footer {
+            background-color: #064c11;
+            color: white;
+            text-align: center;
+            padding: 2%;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+
+
+        .d12{
+            margin-top:15%;
+            display: inline-block;
+            padding: 20px 40px;
+            font-size: 25px;
+            text-decoration: none;
+            color: white;
+            background-color: #064c11 ;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        .d12:hover {
+            background-color: #02a315c4;
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(167, 35, 35, 0.3);
+}
+    </style>
+    
+</head>
+<body>
+
+    <header>
+        <h1>مرحبًا بك في الصفحة الرئيسية</h1>
+    </header>
+
+    <div class="main-content">
+        <p> دمج ملفات bdf </p>
+        <p>مــجــــانــأ </p>
+        <p>جربها الآن </p>
+        <div class="main-content1">
+            <a href="sum (bdf).html">           
+                 <button class="d12">إبدأ</button>
+            </a>
+    
+    
+        </div>
+
+    </div>
+    
+
+    <footer>
+        <p>جميع الحقوق محفوظة &copy; 2023</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // عند تحميل الصفحة، نضيف الكلاس 'show-content' لتظهر الصفحة بتدريج
+            document.querySelector('.main-content').classList.add('show-content');
+        });
+
+
+    
+    </script>
+
+</body>
+</html>

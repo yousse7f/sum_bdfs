@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="ar">
+    <title>تواصل معي</title>
+    <style>
+        body {
+            direction: rtl;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        form {
+            width: 80%;
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #064c11;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #04390d;
+        }
+    </style>
+</head>
+<body>
+        <form action="mailto:u9090dggr@gmail.com" method="post" enctype="text/plain">
+            <label for="name">الاسم:</label>
+            <input type="text" id="name" name="name" required>
+    
+            <label for="email">البريد الإلكتروني:</label>
+            <input type="email" id="email" name="email" required>
+    
+            <label for="message">رسالتك:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+    
+            <button type="submit">إرسال</button>
+        </form>
+        <a href="index.html">
+            <button>العودة للصفحة الرئيسية</button>
+
+        </a>
+</body>
+</html>

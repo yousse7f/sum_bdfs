@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="ar">
+    <title>دمج ملفات PDF</title>
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.js"></script>
+    <style>
+        :root {
+            --white: white;
+            --black: rgba(199, 182, 24, 0.373);
+            --transparent-black: rgba(0, 0, 0, 0.9);
+            --black-border: #242323;
+            --gradient-blue: linear-gradient(135deg, #7c6505, #565d00);
+            --gradient-blue-default: #064c11;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            direction: rtl;
+            font-family: 'Rubik', sans-serif;
+            color: var(--white);
+            background-color: var(--black);
+            overflow: hidden;
+        }
+
+        .container {
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        nav>div {
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            z-index: 100;
+            background-color: #064c11;
+        }
+
+        nav .desktop,
+        nav .mobile {
+            display: none;
+        }
+
+        nav .desktop div {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        nav div a {
+            position: relative;
+            padding: 20px;
+            text-decoration: none;
+            color: var(--white);
+            transition: all .3s;
+        }
+
+        nav div a:hover {
+            background-color: var(--black);
+        }
+
+        nav div a::after {
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 5px;
+            width: 0;
+            transition: all .3s;
+            background-color: var(--gradient-blue-default);
+            background-image: var(--gradient-blue);
+        }
+
+        nav div a.brand {
+            font-weight: bold;
+        }
+
+        nav div a:hover::after {
+            width: 100%;
+        }
+
+        nav a.menu-btn {
+            font-size: 24px;
+        }
+
+        #sidenav {
+            display: none;
+            background-color: var(--transparent-black);
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            padding-top: 120px;
+            padding-bottom: 40px;
+            z-index: 1;
+            transition: all 1s;
+        }
+
+        #sidenav a {
+            display: block;
+            text-decoration: none;
+            padding: 20px 40px;
+            color: var(--white);
+            transition: all .3s;
+        }
+
+        #sidenav .close-btn {
+            display: inline-block;
+            position: absolute;
+            right: 5px;
+            top: 65px;
+            height: 50px;
+            line-height: 50px;
+            width: 50px;
+            text-align: center;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        #sidenav a:hover {
+            background-color: var(--gradient-blue-default);
+            background-image: var(--gradient-blue);
+        }
+
+        main {
+            height: 100%;
+        }
+
+        .parallax-effect {
+            height: 100%;
+            position: relative;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .parallax-effect h1 {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            color: var(--white);
+            text-align: center;
+            font-size: 50px;
+            padding: 0 20px;
+            text-shadow: 2px 2px 5px var(--black);
+        }
+
+        body {
+            background: url('images/bacrond.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        section {
+            margin-bottom: 50px;
+        }
+
+        section h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        @media(max-width: 920px) {
+            .categories .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .reviews .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media(max-width: 640px) {
+            nav .mobile {
+                display: flex;
+            }
+
+            .categories .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .reviews .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(min-width: 641px) {
+            nav .desktop {
+                display: flex;
+            }
+        }
+
+        .container {
+            background-color: #064c1157;
+        } 
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #7b7a77a3;
+        }
+
+        input[type="file"] {
+            margin-bottom: 10px;
+            width: 80%; 
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            button {
+                font-size: 14px;
+            }
+        }
+
+        footer {
+            background-color: #064c11;
+            color: white;
+            padding: 2%;
+            text-align: center;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+
+    
+.d12{
+    display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            background-color: #096c17c5;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        .d12:hover {
+            background-color: #02a315c4;
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(167, 35, 35, 0.3);
+}
+        
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="desktop">
+            <div>
+                <a class="brand" href="index.html">الرئيسية</a>
+                <a href="my proj.html">المشاريع</a>
+                <a href="my proj.html">حول</a>
+                <a href="con.html">تواصل معي</a>
+            </div>
+        </div>
+
+        <div class="mobile">
+            <a class="brand" href="index.html">الرئيسية</a>
+            <a href="my proj.html">المشاريع</a>
+            <a href="my proj.html">حول</a>
+            <a href="con.html">تواصل معي</a>
+        </div>
+    </nav>
+
+    <h1>
+        قم بدمج عدة ملفات من نوع (bdf) مجانا 
+    </h1>
+
+    <input type="file" id="fileInput" multiple>
+    <button onclick="mergeAndOpen()" class="d12">دمج وفتح</button>
+
+    <footer>
+        <div class="copyright">
+            تطوير وتصميم: يوسف محمد عبد الله
+            <br>
+            طالب في كلية الشريعة بالمسجد النبوي
+            <br>
+            لا تنسونا من صالح دعائكم
+            <br>
+                1444 هـ - 2023 م.
+        </div>
+    </footer>
+
+    <script>
+        async function mergeAndOpen() {
+            const fileInput = document.getElementById('fileInput');
+            const selectedFiles = fileInput.files;
+
+            if (selectedFiles.length < 2) {
+                alert('يرجى اختيار ملفين على الأقل.');
+                return;
+            }
+
+            try {
+                const mergedPdf = await PDFLib.PDFDocument.create();
+
+                for (const file of selectedFiles) {
+                    const fileBytes = await file.arrayBuffer();
+                    const pdfDoc = await PDFLib.PDFDocument.load(fileBytes);
+                    const copiedPages = await mergedPdf.copyPages(pdfDoc, pdfDoc.getPageIndices());
+                    copiedPages.forEach(page => mergedPdf.addPage(page));
+                }
+
+                const mergedPdfBytes = await mergedPdf.save();
+                const mergedPdfBlob = new Blob([mergedPdfBytes], { type: 'application/pdf' });
+                const mergedPdfUrl = URL.createObjectURL(mergedPdfBlob);
+
+                window.open(mergedPdfUrl, '_blank');
+            } catch (error) {
+                console.error('حدث خطأ أثناء دمج الملفات:', error);
+            }
+        }
+    </script>
+</body>
+</html>
